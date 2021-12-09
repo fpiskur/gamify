@@ -113,7 +113,7 @@ elsif ARGF.argv.length == 1 && ARGF.argv[0] == "-add"
     loop do
       print "How many hours? "
       hours_for_bonus = STDIN.gets.chomp
-      break if hours_for_bonus.to_i.to_s == hours_for_bonus && hours_worked.to_i > 0
+      break if hours_for_bonus.to_i.to_s == hours_for_bonus && hours_for_bonus.to_i > 0
       puts "Use positive integer!"
     end
     hours_for_bonus = hours_for_bonus.to_i
