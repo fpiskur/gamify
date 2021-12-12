@@ -23,7 +23,7 @@ bonuses = {
   2 => "Refactored old code",
   3 => "Finished a milestone"
 }
-bonus_source = 0
+bonus_key = 0
 xp_per_hour = 100
 
 if ARGF.argv.empty?
@@ -105,8 +105,8 @@ elsif ARGF.argv.length == 1 && ARGF.argv[0] == "-add"
 
     loop do
       print "Answer: "
-      bonus_source = STDIN.gets.chomp.to_i
-      break if bonuses.keys.include?(bonus_source)
+      bonus_key = STDIN.gets.chomp.to_i
+      break if bonuses.keys.include?(bonus_key)
       puts "Please input a number of one of the tasks above!"
     end
 
@@ -117,10 +117,35 @@ elsif ARGF.argv.length == 1 && ARGF.argv[0] == "-add"
       puts "Use positive integer!"
     end
     hours_for_bonus = hours_for_bonus.to_i
+    bonus_xp = (hours_for_bonus * xp_per_hour * bonus_coefficient).to_i
 
   end
 
+  xp_to_add = hours_worked * xp_per_hour
+  if drank_water && enough_sleep && did_workout && did_meditation && ate_fruit_veg
+    xp_to_add = (xp_to_add * 1.1).to_i
+  end
+  if earned_bonus
+    xp_to_add += bonus_xp
+  end
+
+  data = read_from_db
+
+  data["water"] = drank_water
+  data["sleep"] = enough_sleep
+  data["workout"] = did_workout
+  data["meditation"] = did_meditation
+  data["fruit_veg"] = ate_fruit_veg
+
+  data["current_xp"] = data["current_xp"] + xp_to_add
+  if data["current_xp"] >= data["next_lvl_xp"]
+    data["current_lvl"] += 1
+    data["current_lvl_xp"] = data["next_lvl_xp"]
+    data["next_lvl_xp"] = get_next_lvl_xp(data["current_lvl"], data["current_lvl_xp"])
+  end
   
+  File.write("db.txt", JSON.generate(data))
+  print_char_sheet(read_from_db)
 
 else
   puts "USAGE: gamify / gamify -add / gamify -milestone"
