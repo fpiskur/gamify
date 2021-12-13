@@ -1,5 +1,8 @@
+#!/usr/bin/env ruby
+
+require "pathname"
 # add lib folder to load path
-$LOAD_PATH << './lib'
+$LOAD_PATH << File.join( File.dirname(Pathname.new(__FILE__).realpath), 'lib' )
 
 require "print-char-sheet"
 require "json"
@@ -34,7 +37,7 @@ elsif ARGF.argv.length == 1 && ARGF.argv[0] == "-milestone"
   milestone = STDIN.gets.chomp
   data = read_from_db
   data["next_milestone"] = milestone
-  File.write("db.txt", JSON.generate(data))
+  File.write("#{File.dirname(Pathname.new(__FILE__).realpath)}/db.txt", JSON.generate(data))
   print_char_sheet(read_from_db)
 
 elsif ARGF.argv.length == 1 && ARGF.argv[0] == "-add"
@@ -144,7 +147,7 @@ elsif ARGF.argv.length == 1 && ARGF.argv[0] == "-add"
     data["next_lvl_xp"] = get_next_lvl_xp(data["current_lvl"], data["current_lvl_xp"])
   end
   
-  File.write("db.txt", JSON.generate(data))
+  File.write("#{File.dirname(Pathname.new(__FILE__).realpath)}/db.txt", JSON.generate(data))
   print_char_sheet(read_from_db)
 
 else

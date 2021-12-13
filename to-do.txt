@@ -1,0 +1,2 @@
+BUGS:
+- ako dodam dovoljno sati (xp-a) za napredak od 2 ili više nivoa od jednom potrga se logika. print-char-sheet, linija 110: pogrešno računa next_lvl_indicator, vidi di još radi probleme
