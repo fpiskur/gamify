@@ -1,1 +1,12 @@
-{"current_lvl":2,"current_lvl_xp":2500,"current_xp":2500,"next_lvl_xp":5500,"next_milestone":"Finish \"Learn Enough Ruby to be Dangerous\" by Michael Hartl","water":false,"sleep":false,"workout":false,"meditation":false,"fruit_veg":false}
+{
+  "current_lvl":0,
+  "current_lvl_xp":0,
+  "current_xp":0,
+  "next_lvl_xp":1000,
+  "next_milestone":"Finish \"Learn Enough Ruby to be Dangerous\" by Michael Hartl",
+  "water":false,
+  "sleep":false,
+  "workout":false,
+  "meditation":false,
+  "fruit_veg":false
+}

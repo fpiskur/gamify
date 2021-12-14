@@ -141,7 +141,7 @@ elsif ARGF.argv.length == 1 && ARGF.argv[0] == "-add"
   data["fruit_veg"] = ate_fruit_veg
 
   data["current_xp"] = data["current_xp"] + xp_to_add
-  if data["current_xp"] >= data["next_lvl_xp"]
+  while data["current_xp"] >= data["next_lvl_xp"]
     data["current_lvl"] += 1
     data["current_lvl_xp"] = data["next_lvl_xp"]
     data["next_lvl_xp"] = get_next_lvl_xp(data["current_lvl"], data["current_lvl_xp"])
